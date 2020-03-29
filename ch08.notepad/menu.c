@@ -169,7 +169,7 @@ void CreateMenu (GtkWidget *window, GtkWidget *vbox_main)
 
     /* --- Create accel table --- */
     accel_group = gtk_accel_group_new ();
-    gtk_accel_group_attach (accel_group, GTK_OBJECT (window));
+    //gtk_accel_group_attach (accel_group, GTK_OBJECT (window));
 
     /* --- Menu Bar --- */
     menubar = gtk_menu_bar_new ();
@@ -258,7 +258,7 @@ void CreateToolbar (GtkWidget *vbox_main)
 {
 
     /* --- Create the toolbar and add it to the window --- */
-    toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+    toolbar = gtk_toolbar_new ();//GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
     gtk_box_pack_start (GTK_BOX (vbox_main), toolbar, FALSE, TRUE, 0);
     gtk_widget_show (toolbar);
 

@@ -24,7 +24,7 @@ gint CompareNames (gconstpointer sName1, gconstpointer sName2)
  * A print function to display the data elements 
  * in the list.
  */
-PrintNames (gpointer data, gpointer user_data)
+void PrintNames (gpointer data, gpointer user_data)
 {
     gchar    *message;
     GSList   *list;

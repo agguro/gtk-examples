@@ -79,7 +79,7 @@ GtkWidget *CreateMenuItem (GtkWidget *menu,
 
     if (accel_group == NULL) {
         accel_group = gtk_accel_group_new ();
-        gtk_accel_group_attach (accel_group, GTK_OBJECT (win_main));
+        //gtk_accel_group_attach (accel_group, GTK_OBJECT (win_main));
     }
 
     /* --- If there was an accelerator --- */

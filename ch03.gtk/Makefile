@@ -4,8 +4,8 @@ CC = gcc
 all: packtable packbox
 
 packtable : packtable.c 
-	$(CC) `gtk-config --cflags` `gtk-config --libs` packtable.c -o packtable 
+	$(CC) -o packtable packtable.c `pkg-config --cflags gtk+-2.0 --libs gtk+-2.0`
 packbox : packbox.c 
-	$(CC) `gtk-config --cflags` `gtk-config --libs` packbox.c -o packbox 
+	$(CC) -o packbox packbox.c `pkg-config --cflags gtk+-2.0 --libs gtk+-2.0`
 clean: 
 	rm -f *.o packtable packbox

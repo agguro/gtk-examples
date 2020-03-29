@@ -276,8 +276,8 @@ static void CreateMainWindow ()
 
     /* --- Create accel table --- */
     accel_group = gtk_accel_group_new();
-    gtk_accel_group_attach (accel_group, GTK_OBJECT (win_main));
-
+    //gtk_accel_group_attach (accel_group, GTK_OBJECT (win_main));
+	//gtk_accel_group_connect (accel_group, NULL, NULL,NULL,GTK_OBJECT (win_main));
     /* --- Top level window should listen for the destroy --- */
     gtk_signal_connect (GTK_OBJECT (win_main), "destroy",
               GTK_SIGNAL_FUNC(EndProgram), NULL);
@@ -332,7 +332,7 @@ void CreateToolbar (GtkWidget *vbox_main)
 {
 
     /* --- Create the toolbar and add it to the window --- */
-    toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+    toolbar = gtk_toolbar_new (); //GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
     gtk_box_pack_start (GTK_BOX (vbox_main), toolbar, FALSE, TRUE, 0);
     gtk_widget_show (toolbar);
 

@@ -56,7 +56,7 @@ void FindFunction (GtkWidget *widget, gpointer data)
                  	GTK_EDITABLE (entry), 0, -1);
 
     /* --- Get cursor position --- */
-    nIndex = GTK_EDITABLE (text)->selection_end_pos;
+    nIndex = GTK_EDITABLE (text);//->selection_end_pos;
 
     /* --- Find the string --- */
     nIndex = LookForString (szHaystack, szNeedle, nIndex);
@@ -64,12 +64,12 @@ void FindFunction (GtkWidget *widget, gpointer data)
     if (nIndex >= 0) {
 
         /* --- Move the cursor to a position --- */
-        gtk_text_set_point (GTK_TEXT (text), nIndex);
+        gtk_text_set_point ( (text), nIndex);
 
         /* --- These two lines will force the widget to --- */
         /*     scroll to the position where the text is. --- */
-        gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL, " ", 1);
-        gtk_text_backward_delete (GTK_TEXT (text), 1);
+        gtk_text_insert ( (text), NULL, NULL, NULL, " ", 1);
+        gtk_text_backward_delete ( (text), 1);
 
         /* --- Select the field found. --- */
         gtk_editable_select_region (GTK_EDITABLE (text), 

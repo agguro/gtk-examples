@@ -97,7 +97,7 @@ void LoadFile (char *sFilename)
     long fileLen = 0;
 
     /* --- Freeze the widget --- */
-    gtk_text_freeze (GTK_TEXT (text));
+    gtk_text_freeze ((text));
 
     /* --- Empty the widget --- */
     gtk_editable_delete_text (GTK_EDITABLE (text), 0, -1);
@@ -121,7 +121,7 @@ void LoadFile (char *sFilename)
             UpdateProgress (ftell (infile), fileLen);
 
             /* --- Insert the text --- */
-            gtk_text_insert (GTK_TEXT (text), NULL, NULL,
+            gtk_text_insert ( (text), NULL, NULL,
                    NULL, buffer, nchars);
           
             /* --- Less than buffer means EOF --- */
@@ -135,7 +135,7 @@ void LoadFile (char *sFilename)
     EndProgress ();
       
     /* --- Un-freeze the text widget - it'll repaint now --- */
-    gtk_text_thaw (GTK_TEXT (text));
+    gtk_text_thaw ( (text));
 }
 
 
@@ -153,7 +153,7 @@ void SaveFile (char *sFilename)
     char *buffer;
     int nchars;
 
-    gtk_text_freeze (GTK_TEXT (text));
+    gtk_text_freeze ( (text));
 
     /* --- Open the file --- */
     outfile = fopen (sFilename, "w");
@@ -164,7 +164,7 @@ void SaveFile (char *sFilename)
         buffer = gtk_editable_get_chars (
                      GTK_EDITABLE (text), 
                      (gint) 0,
-                     (gint) gtk_text_get_length (GTK_TEXT (text)));
+                     (gint) gtk_text_get_length ( (text)));
 
         /* --- Write the buffer to disk --- */
         nchars = fwrite (buffer, sizeof (char), strlen (buffer), outfile);
@@ -185,7 +185,7 @@ void SaveFile (char *sFilename)
         ShowMessage ("Save", "Error: Can't save file.");
     }
       
-    gtk_text_thaw (GTK_TEXT (text));
+    gtk_text_thaw ( (text));
 }
 
 
@@ -219,7 +219,7 @@ void CreateText (GtkWidget *window, GtkWidget *container)
     text = gtk_text_new (NULL, NULL);
 
     /* --- Allow it to be edited --- */
-    gtk_text_set_editable (GTK_TEXT (text), TRUE);
+    gtk_text_set_editable ( (text), TRUE);
 
     /* --- Insert the text widget into the table --- */
     gtk_table_attach (GTK_TABLE (table), text, 0, 1, 0, 1,
@@ -230,13 +230,13 @@ void CreateText (GtkWidget *window, GtkWidget *container)
     gtk_widget_show (text);
 
     /* --- Add a horizontal scroll bar --- */
-    hscrollbar = gtk_hscrollbar_new (GTK_TEXT (text)->hadj);
+    hscrollbar = gtk_hscrollbar_new ( (text));
     gtk_table_attach (GTK_TABLE (table), hscrollbar, 0, 1, 1, 2,
             GTK_EXPAND | GTK_FILL | GTK_SHRINK, GTK_FILL, 0, 0);
     gtk_widget_show (hscrollbar);
 
     /* --- Add a vertical scroll bar --- */
-    vscrollbar = gtk_vscrollbar_new (GTK_TEXT (text)->vadj);
+    vscrollbar = gtk_vscrollbar_new ( (text));
     gtk_table_attach (GTK_TABLE (table), vscrollbar, 1, 2, 0, 1,
             GTK_FILL, GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0, 0);
     gtk_widget_show (vscrollbar);
@@ -257,7 +257,7 @@ char *GetText ()
     buffer = gtk_editable_get_chars (
                  GTK_EDITABLE (text), 
                  (gint) 0,
-                 (gint) gtk_text_get_length (GTK_TEXT (text)));
+                 (gint) gtk_text_get_length ( (text)));
  
     return (buffer);
 }

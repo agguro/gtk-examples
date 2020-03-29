@@ -46,7 +46,7 @@ void SurferWarning (const gchar *buf)
  *
  * Override for the g_error function
  */
-void SurferError (const gchar *buf)
+GLogFunc SurferError (const gchar *buf)
 {
     printf ("Major wipe out, dude. -> ");
     fputs (buf, stdout);
@@ -88,10 +88,10 @@ int main (int argc, char *argv[])
     } else if (strcmp (argv[1], "surfer") == 0) {
 
         /* --- Seems that they want surfer speech for the errors. --- */
-        g_set_error_handler (SurferError);
-        g_set_warning_handler (SurferWarning);
-        g_set_message_handler (SurferMessage);
-        g_set_print_handler (SurferPrint);
+		g_log_set_handler (NULL,G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL| G_LOG_FLAG_RECURSION,(GLogFunc)SurferError,NULL);
+       // g_log_set_warning_handler (SurferWarning);
+       // g_log_message_handler (SurferMessage);
+       // g_log_print_handler (SurferPrint);
     } else {
 
         /* --- Can only pick 'normal' or 'surfer' --- */
