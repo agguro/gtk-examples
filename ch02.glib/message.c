@@ -13,10 +13,13 @@
  *
  * Override function for the g_print function. 
  */
-void SurferPrint (const gchar *buf)
+void SurferPrint (const gchar *log_domain,
+                  GLogLevelFlags log_level,
+                  const gchar *message,
+                  gpointer user_data)
 {
     printf ("Dude, ");
-    fputs (buf, stdout);
+    fputs (message, stdout);
 }
 
 /*
@@ -88,10 +91,13 @@ int main (int argc, char *argv[])
     } else if (strcmp (argv[1], "surfer") == 0) {
 
         /* --- Seems that they want surfer speech for the errors. --- */
-		g_log_set_handler (NULL,G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL| G_LOG_FLAG_RECURSION,(GLogFunc)SurferError,NULL);
-       // g_log_set_warning_handler (SurferWarning);
-       // g_log_message_handler (SurferMessage);
-       // g_log_print_handler (SurferPrint);
+        
+        g_log_set_handler (NULL, G_LOG_LEVEL_WARNING | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, (GLogFunc)SurferWarning, NULL);
+        //This example adds a log handler for all critical messages from GTK+:
+        g_log_set_handler ("Gtk", G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, (GLogFunc)SurferError, NULL);
+        //This example adds a log handler for all messages from GLib:       
+        g_log_set_handler ("GLib", G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION,(GLogFunc)SurferPrint, NULL);
+
     } else {
 
         /* --- Can only pick 'normal' or 'surfer' --- */
@@ -103,7 +109,7 @@ int main (int argc, char *argv[])
      * --- the message will be intercepted.
      */
 
-    g_print ("Here's a print\n");
+    g_print ("Here's a print\n\n");
     g_message ("Here's a message\n");
     g_warning ("Here's a warning\n");
     g_error ("Here's an error\n");
